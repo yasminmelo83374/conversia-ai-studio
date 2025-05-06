@@ -3,18 +3,37 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ParticleBackground } from "@/components/ui-particles";
 import { Bot, Lock, Mail } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isManager, setIsManager] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Would handle login logic here
-    window.location.href = "/dashboard";
+    
+    // Simulação de autenticação
+    if (email && password) {
+      // Armazenar o tipo de usuário no sessionStorage
+      sessionStorage.setItem('userRole', isManager ? 'manager' : 'user');
+      
+      // Notificar o usuário
+      toast({
+        title: `Login realizado com sucesso`,
+        description: `Bem-vindo! Você entrou como ${isManager ? 'gestor' : 'usuário comum'}.`,
+        duration: 3000,
+      });
+      
+      // Redirecionar para o dashboard
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -71,6 +90,20 @@ export default function Login() {
                   className="ai-input pl-10"
                 />
               </div>
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id="isManager" 
+                checked={isManager}
+                onCheckedChange={(checked) => setIsManager(checked as boolean)}
+              />
+              <label
+                htmlFor="isManager"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Entrar como gestor
+              </label>
             </div>
             
             <Button type="submit" className="ai-button w-full">
