@@ -2,40 +2,34 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { Button } from "@/components/ui/button";
-import { 
-  Tabs, 
-  TabsContent, 
-  TabsList, 
-  TabsTrigger 
-} from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  User, 
-  Building, 
-  CreditCard, 
-  Bell, 
-  Shield, 
-  CheckCircle
+  User,
+  Building,
+  Key,
+  Bell,
+  Shield,
+  CreditCard,
+  ChevronRight,
+  Mail,
+  Phone,
+  Globe,
+  Users,
+  HardDrive
 } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { Avatar } from "@/components/ui/avatar";
+import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
 
 export default function Settings() {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("perfil");
   
-  const handleSaveProfile = () => {
+  const saveSettings = () => {
     toast({
-      title: "Perfil atualizado",
-      description: "Suas informações foram atualizadas com sucesso!",
-    });
-  };
-  
-  const handleSaveCompany = () => {
-    toast({
-      title: "Empresa atualizada",
-      description: "As informações da empresa foram atualizadas com sucesso!",
+      title: "Configurações salvas",
+      description: "Suas alterações foram salvas com sucesso.",
     });
   };
   
@@ -47,283 +41,466 @@ export default function Settings() {
         <div className="flex-1 p-6 overflow-auto">
           <div className="mb-8">
             <h1 className="text-2xl font-bold mb-2">Configurações</h1>
-            <p className="text-aiGray">Gerencie suas preferências e dados da conta</p>
+            <p className="text-aiGray">Gerencie as configurações da sua conta e empresa</p>
           </div>
           
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-            <TabsList className="bg-white/5 mb-6 grid grid-cols-5 w-full max-w-3xl">
-              <TabsTrigger value="perfil" className="data-[state=active]:bg-aiBlue/20 flex gap-2 items-center">
+          <Tabs defaultValue="profile" className="w-full">
+            <TabsList className="grid grid-cols-5 mb-8">
+              <TabsTrigger value="profile" className="flex items-center gap-2">
                 <User className="w-4 h-4" />
                 <span>Perfil</span>
               </TabsTrigger>
-              <TabsTrigger value="empresa" className="data-[state=active]:bg-aiBlue/20 flex gap-2 items-center">
+              <TabsTrigger value="company" className="flex items-center gap-2">
                 <Building className="w-4 h-4" />
                 <span>Empresa</span>
               </TabsTrigger>
-              <TabsTrigger value="planos" className="data-[state=active]:bg-aiBlue/20 flex gap-2 items-center">
-                <CreditCard className="w-4 h-4" />
-                <span>Planos</span>
+              <TabsTrigger value="security" className="flex items-center gap-2">
+                <Key className="w-4 h-4" />
+                <span>Segurança</span>
               </TabsTrigger>
-              <TabsTrigger value="notificacoes" className="data-[state=active]:bg-aiBlue/20 flex gap-2 items-center">
+              <TabsTrigger value="notifications" className="flex items-center gap-2">
                 <Bell className="w-4 h-4" />
                 <span>Notificações</span>
               </TabsTrigger>
-              <TabsTrigger value="seguranca" className="data-[state=active]:bg-aiBlue/20 flex gap-2 items-center">
-                <Shield className="w-4 h-4" />
-                <span>Segurança</span>
+              <TabsTrigger value="billing" className="flex items-center gap-2">
+                <CreditCard className="w-4 h-4" />
+                <span>Faturamento</span>
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="perfil" className="max-w-3xl">
-              <div className="glass-morphism rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-6">Informações Pessoais</h2>
+            <TabsContent value="profile">
+              <div className="glass-morphism p-6 rounded-xl mb-6">
+                <h2 className="text-lg font-semibold mb-4">Informações Pessoais</h2>
+                <div className="flex items-start gap-6">
+                  <Avatar className="h-20 w-20">
+                    <img src="https://i.pravatar.cc/150?img=33" alt="Profile" className="rounded-full" />
+                  </Avatar>
+                  
+                  <div className="flex-1 grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-aiGray">Nome</label>
+                      <Input defaultValue="Rafael Silva" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-aiGray">Sobrenome</label>
+                      <Input defaultValue="Oliveira" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-aiGray">Email</label>
+                      <Input defaultValue="rafael.silva@gmail.com" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-aiGray">Telefone</label>
+                      <Input defaultValue="(11) 98765-4321" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-aiGray">Cargo</label>
+                      <Input defaultValue="CEO" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-aiGray">Departamento</label>
+                      <Input defaultValue="Diretoria" />
+                    </div>
+                  </div>
+                </div>
                 
+                <div className="flex justify-end mt-6">
+                  <Button onClick={saveSettings} className="ai-button">
+                    Salvar Alterações
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="glass-morphism p-6 rounded-xl">
+                <h2 className="text-lg font-semibold mb-4">Preferências</h2>
                 <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Nome completo</Label>
-                      <Input id="name" defaultValue="Rafael Silva" className="ai-input" />
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Idioma</h3>
+                      <p className="text-sm text-aiGray">Selecione seu idioma preferido</p>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" defaultValue="rafael.silva@gmail.com" className="ai-input" />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Telefone</Label>
-                      <Input id="phone" defaultValue="(11) 98765-4321" className="ai-input" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="position">Cargo</Label>
-                      <Input id="position" defaultValue="Gerente de Marketing" className="ai-input" />
+                    <div className="flex items-center">
+                      <span className="mr-2">Português (Brasil)</span>
+                      <ChevronRight className="h-4 w-4 text-aiGray" />
                     </div>
                   </div>
                   
-                  <div className="pt-4 border-t border-white/10">
-                    <Button className="ai-button" onClick={handleSaveProfile}>Salvar Alterações</Button>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Fuso horário</h3>
+                      <p className="text-sm text-aiGray">Defina seu fuso horário</p>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="mr-2">América/São Paulo (UTC-3)</span>
+                      <ChevronRight className="h-4 w-4 text-aiGray" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Tema escuro</h3>
+                      <p className="text-sm text-aiGray">Ativar tema escuro</p>
+                    </div>
+                    <Switch defaultChecked id="dark-mode" />
                   </div>
                 </div>
               </div>
             </TabsContent>
             
-            <TabsContent value="empresa" className="max-w-3xl">
-              <div className="glass-morphism rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-6">Dados da Empresa</h2>
+            <TabsContent value="company">
+              <div className="glass-morphism p-6 rounded-xl mb-6">
+                <h2 className="text-lg font-semibold mb-4">Informações da Empresa</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-aiGray">Nome da Empresa</label>
+                    <Input defaultValue="Tech Solutions SA" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-aiGray">CNPJ</label>
+                    <Input defaultValue="12.345.678/0001-90" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-aiGray">Segmento</label>
+                    <Input defaultValue="Tecnologia" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-aiGray">Tamanho</label>
+                    <Input defaultValue="50-100 funcionários" />
+                  </div>
+                  <div className="space-y-2 col-span-2">
+                    <label className="text-sm font-medium text-aiGray">Endereço</label>
+                    <Input defaultValue="Av. Paulista, 1000 - Bela Vista, São Paulo - SP, 01310-100" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-aiGray">Website</label>
+                    <Input defaultValue="https://techsolutions.com.br" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-aiGray">Email Comercial</label>
+                    <Input defaultValue="contato@techsolutions.com.br" />
+                  </div>
+                </div>
+                
+                <div className="flex justify-end mt-6">
+                  <Button onClick={saveSettings} className="ai-button">
+                    Salvar Alterações
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="glass-morphism p-6 rounded-xl">
+                <h2 className="text-lg font-semibold mb-4">Integrações</h2>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center mr-4">
+                        <Mail className="h-5 w-5 text-aiBlue" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">Email</h3>
+                        <p className="text-sm text-aiGray">Integração com serviços de email</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-green-500/20 text-green-400">Conectado</Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center mr-4">
+                        <Phone className="h-5 w-5 text-aiBlue" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">WhatsApp</h3>
+                        <p className="text-sm text-aiGray">Integração com WhatsApp Business</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-yellow-500/20 text-yellow-400">Pendente</Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center mr-4">
+                        <Globe className="h-5 w-5 text-aiBlue" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">Website</h3>
+                        <p className="text-sm text-aiGray">Widget para seu website</p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Configurar</Button>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="security">
+              <div className="glass-morphism p-6 rounded-xl mb-6">
+                <h2 className="text-lg font-semibold mb-4">Senha e Autenticação</h2>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Alterar senha</h3>
+                      <p className="text-sm text-aiGray">Última alteração há 3 meses</p>
+                    </div>
+                    <Button variant="outline">Alterar senha</Button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Autenticação de dois fatores</h3>
+                      <p className="text-sm text-aiGray">Adicione uma camada extra de segurança</p>
+                    </div>
+                    <Switch id="2fa" />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Sessões ativas</h3>
+                      <p className="text-sm text-aiGray">Gerencie seus dispositivos conectados</p>
+                    </div>
+                    <Button variant="outline">Ver sessões</Button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-morphism p-6 rounded-xl">
+                <h2 className="text-lg font-semibold mb-4">Permissões</h2>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center mr-4">
+                        <Users className="h-5 w-5 text-aiBlue" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">Convites de equipe</h3>
+                        <p className="text-sm text-aiGray">Controle quem pode convidar novos membros</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="mr-2">Apenas administradores</span>
+                      <ChevronRight className="h-4 w-4 text-aiGray" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center mr-4">
+                        <Shield className="h-5 w-5 text-aiBlue" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">Papéis e permissões</h3>
+                        <p className="text-sm text-aiGray">Configure as permissões de cada papel</p>
+                      </div>
+                    </div>
+                    <Button variant="outline">Configurar</Button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center mr-4">
+                        <HardDrive className="h-5 w-5 text-aiBlue" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">Logs de Atividade</h3>
+                        <p className="text-sm text-aiGray">Veja o histórico de ações de usuários</p>
+                      </div>
+                    </div>
+                    <Button variant="outline">Ver logs</Button>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="notifications">
+              <div className="glass-morphism p-6 rounded-xl">
+                <h2 className="text-lg font-semibold mb-6">Preferências de Notificação</h2>
                 
                 <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="companyName">Nome da empresa</Label>
-                      <Input id="companyName" defaultValue="Financial Credit" className="ai-input" />
+                  <div>
+                    <h3 className="font-medium mb-4">Notificações por Email</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Novas conversas</p>
+                          <p className="text-sm text-aiGray">Quando uma nova conversa é iniciada</p>
+                        </div>
+                        <Switch id="email-new-conversations" defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Mensagens não lidas</p>
+                          <p className="text-sm text-aiGray">Quando há mensagens não lidas por mais de 1 hora</p>
+                        </div>
+                        <Switch id="email-unread" defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Relatórios semanais</p>
+                          <p className="text-sm text-aiGray">Resumo semanal de atividades</p>
+                        </div>
+                        <Switch id="email-reports" />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="cnpj">CNPJ</Label>
-                      <Input id="cnpj" defaultValue="12.345.678/0001-90" className="ai-input" />
+                  </div>
+                  
+                  <div>
+                    <h3 className="font-medium mb-4">Notificações no Aplicativo</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Novas mensagens</p>
+                          <p className="text-sm text-aiGray">Quando receber novas mensagens</p>
+                        </div>
+                        <Switch id="app-new-messages" defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Menções</p>
+                          <p className="text-sm text-aiGray">Quando você for mencionado por um colega</p>
+                        </div>
+                        <Switch id="app-mentions" defaultChecked />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Atualizações do sistema</p>
+                          <p className="text-sm text-aiGray">Notificações sobre atualizações da plataforma</p>
+                        </div>
+                        <Switch id="app-updates" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-end pt-2">
+                    <Button onClick={saveSettings} className="ai-button">
+                      Salvar Preferências
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="billing">
+              <div className="glass-morphism p-6 rounded-xl mb-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-semibold">Plano Atual</h2>
+                  <Badge className="bg-aiBlue/20 text-aiBlue">Pro</Badge>
+                </div>
+                
+                <div className="bg-white/5 rounded-lg p-4 mb-6">
+                  <div className="flex justify-between items-center mb-3">
+                    <div>
+                      <h3 className="font-medium">Plano Pro</h3>
+                      <p className="text-sm text-aiGray">Faturamento mensal</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold">R$ 199,00/mês</p>
+                      <p className="text-sm text-aiGray">Próxima cobrança em 15/06/2023</p>
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="address">Endereço</Label>
-                    <Input id="address" defaultValue="Av. Paulista, 1000, São Paulo - SP" className="ai-input" />
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="segment">Segmento</Label>
-                      <Input id="segment" defaultValue="Serviços Financeiros" className="ai-input" />
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 rounded-full bg-green-400 mr-2"></div>
+                      <p className="text-sm">5 agentes ativos</p>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="website">Website</Label>
-                      <Input id="website" defaultValue="https://financialcredit.com.br" className="ai-input" />
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 rounded-full bg-green-400 mr-2"></div>
+                      <p className="text-sm">10.000 mensagens/mês</p>
                     </div>
-                  </div>
-                  
-                  <div className="pt-4 border-t border-white/10">
-                    <Button className="ai-button" onClick={handleSaveCompany}>Salvar Alterações</Button>
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 rounded-full bg-green-400 mr-2"></div>
+                      <p className="text-sm">Suporte prioritário</p>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 rounded-full bg-green-400 mr-2"></div>
+                      <p className="text-sm">Análises avançadas</p>
+                    </div>
                   </div>
                 </div>
+                
+                <div className="flex space-x-4">
+                  <Button variant="outline">Alterar plano</Button>
+                  <Button variant="outline" className="text-red-400 hover:text-red-300">Cancelar assinatura</Button>
+                </div>
               </div>
-            </TabsContent>
-            
-            <TabsContent value="planos" className="max-w-4xl">
-              <div className="glass-morphism rounded-xl p-6">
+              
+              <div className="glass-morphism p-6 rounded-xl mb-6">
+                <h2 className="text-lg font-semibold mb-4">Método de Pagamento</h2>
+                
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold">Plano Atual</h2>
-                  <Badge className="bg-aiPurple/20 text-aiPurple">Plano Pro</Badge>
-                </div>
-                
-                <div className="mb-8">
-                  <div className="flex items-center mb-2">
-                    <CheckCircle className="w-4 h-4 text-aiPurple mr-2" />
-                    <span>Ativo até 05/06/2025</span>
-                  </div>
-                  <div className="flex items-center mb-2">
-                    <CheckCircle className="w-4 h-4 text-aiPurple mr-2" />
-                    <span>10 agentes incluídos</span>
-                  </div>
-                  <div className="flex items-center mb-2">
-                    <CheckCircle className="w-4 h-4 text-aiPurple mr-2" />
-                    <span>Conversas ilimitadas</span>
-                  </div>
                   <div className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-aiPurple mr-2" />
-                    <span>Análises avançadas</span>
+                    <div className="w-12 h-8 bg-white/10 rounded flex items-center justify-center mr-3">
+                      <CreditCard className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="font-medium">•••• •••• •••• 4242</p>
+                      <p className="text-sm text-aiGray">Expira em 12/2025</p>
+                    </div>
+                  </div>
+                  <div>
+                    <Button variant="ghost" size="sm">Editar</Button>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-3 gap-6">
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
-                    <div className="mb-4">
-                      <div className="text-lg font-semibold">Plano Starter</div>
-                      <div className="text-2xl font-bold mt-2">R$99<span className="text-sm text-aiGray">/mês</span></div>
-                    </div>
-                    <ul className="mb-6 space-y-2 text-sm">
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>3 agentes</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>500 conversas/mês</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Análises básicas</span>
-                      </li>
-                    </ul>
-                    <Button variant="outline" className="w-full">Fazer Downgrade</Button>
-                  </div>
-                  
-                  <div className="bg-aiBlue/10 rounded-xl p-6 border border-aiBlue/30 relative">
-                    <div className="absolute -top-3 right-6 bg-aiBlue text-xs px-3 py-1 rounded-full">
-                      Atual
-                    </div>
-                    <div className="mb-4">
-                      <div className="text-lg font-semibold">Plano Pro</div>
-                      <div className="text-2xl font-bold mt-2">R$249<span className="text-sm text-aiGray">/mês</span></div>
-                    </div>
-                    <ul className="mb-6 space-y-2 text-sm">
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>10 agentes</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Conversas ilimitadas</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Análises avançadas</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Intervenção em tempo real</span>
-                      </li>
-                    </ul>
-                    <Button className="ai-button w-full" disabled>Plano Atual</Button>
-                  </div>
-                  
-                  <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
-                    <div className="mb-4">
-                      <div className="text-lg font-semibold">Plano Enterprise</div>
-                      <div className="text-2xl font-bold mt-2">R$499<span className="text-sm text-aiGray">/mês</span></div>
-                    </div>
-                    <ul className="mb-6 space-y-2 text-sm">
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Agentes ilimitados</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Conversas ilimitadas</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>API personalizada</span>
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="w-3 h-3 text-aiBlue mr-2" />
-                        <span>Suporte dedicado</span>
-                      </li>
-                    </ul>
-                    <Button variant="outline" className="w-full">Fazer Upgrade</Button>
-                  </div>
-                </div>
+                <Button variant="outline">Adicionar novo método</Button>
               </div>
-            </TabsContent>
-            
-            <TabsContent value="notificacoes" className="max-w-3xl">
-              <div className="glass-morphism rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-6">Preferências de Notificação</h2>
+              
+              <div className="glass-morphism p-6 rounded-xl">
+                <h2 className="text-lg font-semibold mb-4">Histórico de Faturas</h2>
                 
-                <div className="space-y-6">
-                  <NotificationSetting
-                    title="Novas conversas"
-                    description="Receba notificações quando um cliente iniciar uma nova conversa"
-                    defaultChecked={true}
-                  />
-                  
-                  <NotificationSetting
-                    title="Transferências de agente"
-                    description="Seja notificado quando um agente transferir uma conversa para você"
-                    defaultChecked={true}
-                  />
-                  
-                  <NotificationSetting
-                    title="Relatórios semanais"
-                    description="Receba um resumo semanal do desempenho dos seus agentes"
-                    defaultChecked={true}
-                  />
-                  
-                  <NotificationSetting
-                    title="Atualizações da plataforma"
-                    description="Seja informado sobre novas funcionalidades e atualizações"
-                    defaultChecked={false}
-                  />
-                  
-                  <NotificationSetting
-                    title="Dicas e melhores práticas"
-                    description="Receba dicas para melhorar o desempenho dos seus agentes"
-                    defaultChecked={false}
-                  />
-                </div>
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="seguranca" className="max-w-3xl">
-              <div className="glass-morphism rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-6">Segurança da Conta</h2>
-                
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="currentPassword">Senha atual</Label>
-                    <Input id="currentPassword" type="password" placeholder="••••••••" className="ai-input" />
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="newPassword">Nova senha</Label>
-                      <Input id="newPassword" type="password" placeholder="••••••••" className="ai-input" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirmar senha</Label>
-                      <Input id="confirmPassword" type="password" placeholder="••••••••" className="ai-input" />
-                    </div>
-                  </div>
-                  
-                  <div className="pt-4 border-t border-white/10">
-                    <Button className="ai-button">Atualizar Senha</Button>
-                  </div>
-                  
-                  <div className="pt-6 border-t border-white/10 mt-6">
-                    <h3 className="text-lg font-medium mb-4">Autenticação de dois fatores</h3>
-                    <p className="text-sm text-aiGray mb-4">
-                      Adicione uma camada extra de segurança à sua conta ativando a autenticação de dois fatores.
-                    </p>
-                    <Button variant="outline">Configurar 2FA</Button>
-                  </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="px-4 py-3 text-left text-sm text-aiGray">Data</th>
+                        <th className="px-4 py-3 text-left text-sm text-aiGray">Descrição</th>
+                        <th className="px-4 py-3 text-left text-sm text-aiGray">Valor</th>
+                        <th className="px-4 py-3 text-left text-sm text-aiGray">Status</th>
+                        <th className="px-4 py-3 text-right text-sm text-aiGray">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-white/5">
+                        <td className="px-4 py-3 text-sm">15/05/2023</td>
+                        <td className="px-4 py-3 text-sm">Plano Pro - Mensal</td>
+                        <td className="px-4 py-3 text-sm">R$ 199,00</td>
+                        <td className="px-4 py-3">
+                          <Badge className="bg-green-500/20 text-green-400">Pago</Badge>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <Button variant="ghost" size="sm">
+                            Ver fatura
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-white/5">
+                        <td className="px-4 py-3 text-sm">15/04/2023</td>
+                        <td className="px-4 py-3 text-sm">Plano Pro - Mensal</td>
+                        <td className="px-4 py-3 text-sm">R$ 199,00</td>
+                        <td className="px-4 py-3">
+                          <Badge className="bg-green-500/20 text-green-400">Pago</Badge>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <Button variant="ghost" size="sm">
+                            Ver fatura
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-white/5">
+                        <td className="px-4 py-3 text-sm">15/03/2023</td>
+                        <td className="px-4 py-3 text-sm">Plano Pro - Mensal</td>
+                        <td className="px-4 py-3 text-sm">R$ 199,00</td>
+                        <td className="px-4 py-3">
+                          <Badge className="bg-green-500/20 text-green-400">Pago</Badge>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <Button variant="ghost" size="sm">
+                            Ver fatura
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </TabsContent>
@@ -331,19 +508,5 @@ export default function Settings() {
         </div>
       </div>
     </SidebarProvider>
-  );
-}
-
-function NotificationSetting({ title, description, defaultChecked }: { title: string, description: string, defaultChecked: boolean }) {
-  return (
-    <div className="flex items-start justify-between py-4 border-b border-white/10">
-      <div>
-        <h3 className="font-medium">{title}</h3>
-        <p className="text-sm text-aiGray">{description}</p>
-      </div>
-      <div className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-aiBlue">
-        <span className="inline-block h-5 w-5 transform rounded-full bg-white transition-transform translate-x-5"></span>
-      </div>
-    </div>
   );
 }

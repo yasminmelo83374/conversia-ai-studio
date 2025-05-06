@@ -5,12 +5,14 @@ import { AgentCard, AgentProps } from "@/components/agent-card";
 import { Plus, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { CreateAgentModal } from "@/components/create-agent-modal";
 
 export default function Agents() {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   
   // Mock agents data
   const agents: AgentProps[] = [
@@ -56,11 +58,8 @@ export default function Agents() {
     }
   ];
   
-  const createNewAgent = () => {
-    toast({
-      title: "Nova funcionalidade",
-      description: "A criação de agentes será disponibilizada em breve!",
-    });
+  const openCreateModal = () => {
+    setIsCreateModalOpen(true);
   };
   
   return (
@@ -79,7 +78,7 @@ export default function Agents() {
               <h2 className="text-xl font-semibold">Todos os Agentes</h2>
               <span className="ml-3 bg-white/10 text-aiGray text-xs px-2 py-1 rounded-full">{agents.length}</span>
             </div>
-            <Button className="ai-button" onClick={createNewAgent}>
+            <Button className="ai-button" onClick={openCreateModal}>
               <Plus className="w-4 h-4 mr-2" />
               Criar Agente
             </Button>
@@ -99,7 +98,7 @@ export default function Agents() {
                 <p className="text-sm text-aiGray mb-6 max-w-xs">
                   Personalize um agente para seu negócio em minutos, com treinamento e configuração simples.
                 </p>
-                <Button className="ai-button-outline" onClick={createNewAgent}>
+                <Button className="ai-button-outline" onClick={openCreateModal}>
                   <span>Começar</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
@@ -108,6 +107,11 @@ export default function Agents() {
           </div>
         </div>
       </div>
+      
+      <CreateAgentModal 
+        open={isCreateModalOpen}
+        onOpenChange={setIsCreateModalOpen}
+      />
     </SidebarProvider>
   );
 }
