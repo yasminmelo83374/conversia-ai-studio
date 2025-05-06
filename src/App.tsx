@@ -14,6 +14,7 @@ import Conversations from "./pages/Conversations";
 import Analytics from "./pages/Analytics";
 import Team from "./pages/Team";
 import Settings from "./pages/Settings";
+import ManagerControl from "./pages/ManagerControl";
 import NotFound from "./pages/NotFound";
 
 // Create a client
@@ -37,6 +38,7 @@ const App = () => {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/team" element={<Team />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/manager" element={<ManagerControl />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,10 +13,18 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
-import { Bot, Layout, MessageCircle, BarChart, Settings, Users, Bot as BotIcon } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Bot, Layout, MessageCircle, BarChart, Settings, Users, Bot as BotIcon, Shield } from "lucide-react";
 
 export function DashboardSidebar() {
+  const [isManager, setIsManager] = useState(false);
+  const location = useLocation();
+  
+  useEffect(() => {
+    const userRole = sessionStorage.getItem('userRole');
+    setIsManager(userRole === 'manager');
+  }, []);
+  
   return (
     <Sidebar className="border-r border-white/5">
       <SidebarHeader className="flex items-center pl-6 h-14">
@@ -33,7 +42,10 @@ export function DashboardSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/dashboard" className="flex gap-2 items-center">
+                  <Link 
+                    to="/dashboard" 
+                    className={`flex gap-2 items-center ${location.pathname === '/dashboard' ? 'text-aiBlue' : ''}`}
+                  >
                     <Layout className="h-4 w-4" />
                     <span>Dashboard</span>
                   </Link>
@@ -42,7 +54,10 @@ export function DashboardSidebar() {
               
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/agents" className="flex gap-2 items-center">
+                  <Link 
+                    to="/agents" 
+                    className={`flex gap-2 items-center ${location.pathname === '/agents' ? 'text-aiBlue' : ''}`}
+                  >
                     <BotIcon className="h-4 w-4" />
                     <span>Agentes</span>
                   </Link>
@@ -51,7 +66,10 @@ export function DashboardSidebar() {
               
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/conversations" className="flex gap-2 items-center">
+                  <Link 
+                    to="/conversations" 
+                    className={`flex gap-2 items-center ${location.pathname === '/conversations' ? 'text-aiBlue' : ''}`}
+                  >
                     <MessageCircle className="h-4 w-4" />
                     <span>Conversas</span>
                   </Link>
@@ -60,7 +78,10 @@ export function DashboardSidebar() {
               
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/analytics" className="flex gap-2 items-center">
+                  <Link 
+                    to="/analytics" 
+                    className={`flex gap-2 items-center ${location.pathname === '/analytics' ? 'text-aiBlue' : ''}`}
+                  >
                     <BarChart className="h-4 w-4" />
                     <span>Análises</span>
                   </Link>
@@ -69,12 +90,29 @@ export function DashboardSidebar() {
               
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/team" className="flex gap-2 items-center">
+                  <Link 
+                    to="/team" 
+                    className={`flex gap-2 items-center ${location.pathname === '/team' ? 'text-aiBlue' : ''}`}
+                  >
                     <Users className="h-4 w-4" />
                     <span>Equipe</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+              
+              {isManager && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link 
+                      to="/manager" 
+                      className={`flex gap-2 items-center ${location.pathname === '/manager' ? 'text-aiBlue' : ''}`}
+                    >
+                      <Shield className="h-4 w-4" />
+                      <span>Painel do Gestor</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -85,7 +123,10 @@ export function DashboardSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link to="/settings" className="flex gap-2 items-center">
+                  <Link 
+                    to="/settings" 
+                    className={`flex gap-2 items-center ${location.pathname === '/settings' ? 'text-aiBlue' : ''}`}
+                  >
                     <Settings className="h-4 w-4" />
                     <span>Configurações</span>
                   </Link>
