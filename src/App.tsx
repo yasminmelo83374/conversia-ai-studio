@@ -9,6 +9,11 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AgentConfig from "./pages/AgentConfig";
+import Agents from "./pages/Agents";
+import Conversations from "./pages/Conversations";
+import Analytics from "./pages/Analytics";
+import Team from "./pages/Team";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 // Create a client
@@ -27,6 +32,11 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/agent/:id" element={<AgentConfig />} />
+              <Route path="/agents" element={<Agents />} />
+              <Route path="/conversations" element={<Conversations />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/settings" element={<Settings />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
