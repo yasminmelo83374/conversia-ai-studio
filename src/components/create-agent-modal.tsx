@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Slider } from "@/components/ui/slider";
-import { InfoCircle, AlertCircle } from "lucide-react";
+import { Info, AlertCircle } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const formSchema = z.object({
@@ -130,7 +129,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="w-80 p-3">
                             <p>Nome que seu cliente verá durante a conversa no WhatsApp.</p>
@@ -156,7 +155,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="w-80 p-3">
                             <p>Define o comportamento base e recomendações para seu agente.</p>
@@ -219,7 +218,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="w-80 p-3">
                             <p>Modelos mais avançados têm melhor compreensão, mas custam mais por token.</p>
@@ -261,7 +260,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="w-80 p-3">
                             <p>Define como seu agente se comunica com os clientes.</p>
@@ -301,7 +300,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                          <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                         </TooltipTrigger>
                         <TooltipContent className="w-80 p-3">
                           <p>Temperatura define a criatividade do agente. Valores mais baixos (0.2) geram respostas mais precisas e consistentes. Valores mais altos (1.0) geram respostas mais criativas e diversificadas.</p>
@@ -339,7 +338,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="w-80 p-3">
                             <p>Tempo para o agente começar a responder. Um pequeno delay torna a conversa mais natural.</p>
@@ -378,7 +377,7 @@ export function CreateAgentModal({ open, onOpenChange }: CreateAgentModalProps) 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent className="w-80 p-3">
                             <p>Idioma principal do agente. Detecção automática responde no idioma da mensagem do cliente.</p>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -20,7 +19,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { 
   ArrowLeft, Upload, Save, Bot, Trash2, MessageCircle, 
-  Clock, FileText, Zap, Settings, Shield, InfoCircle,
+  Clock, FileText, Zap, Settings, Shield, Info,
   Upload as UploadIcon, AlertTriangle
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -332,7 +331,7 @@ export default function AgentConfig() {
                               <TooltipProvider>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                   </TooltipTrigger>
                                   <TooltipContent className="w-80 p-3">
                                     <p>Nome que seu cliente verá durante a conversa no WhatsApp.</p>
@@ -361,7 +360,7 @@ export default function AgentConfig() {
                               <TooltipProvider>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                   </TooltipTrigger>
                                   <TooltipContent className="w-80 p-3">
                                     <p>Define como seu agente se comunica com os clientes.</p>
@@ -425,7 +424,7 @@ export default function AgentConfig() {
                             <TooltipProvider>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                 </TooltipTrigger>
                                 <TooltipContent className="w-80 p-3">
                                   <p>Modelos mais avançados têm melhor compreensão, mas custam mais por token.</p>
@@ -467,7 +466,7 @@ export default function AgentConfig() {
                             <TooltipProvider>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                 </TooltipTrigger>
                                 <TooltipContent className="w-80 p-3">
                                   <p>Temperatura define a criatividade do agente. Valores mais baixos (0.2) geram respostas mais precisas e consistentes. Valores mais altos (1.0) geram respostas mais criativas e diversificadas.</p>
@@ -505,7 +504,7 @@ export default function AgentConfig() {
                               <TooltipProvider>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                   </TooltipTrigger>
                                   <TooltipContent className="w-80 p-3">
                                     <p>Tempo para o agente começar a responder. Um pequeno delay torna a conversa mais natural.</p>
@@ -545,7 +544,7 @@ export default function AgentConfig() {
                             <TooltipProvider>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                 </TooltipTrigger>
                                 <TooltipContent className="w-80 p-3">
                                   <p>Defina claramente o que o agente deve realizar em suas interações.</p>
@@ -578,7 +577,7 @@ export default function AgentConfig() {
                             <TooltipProvider>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                 </TooltipTrigger>
                                 <TooltipContent className="w-80 p-3">
                                   <p>Palavras que seu agente deve priorizar ao responder.</p>
@@ -636,7 +635,7 @@ export default function AgentConfig() {
                             <TooltipProvider>
                               <Tooltip>
                                 <TooltipTrigger asChild>
-                                  <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                 </TooltipTrigger>
                                 <TooltipContent className="w-80 p-3">
                                   <p>Instruções detalhadas sobre como o agente deve se comportar e responder.</p>
@@ -670,7 +669,7 @@ export default function AgentConfig() {
                               <TooltipProvider>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                   </TooltipTrigger>
                                   <TooltipContent className="w-80 p-3">
                                     <p>Frases ou palavras que o agente deve evitar usar.</p>
@@ -703,7 +702,7 @@ export default function AgentConfig() {
                               <TooltipProvider>
                                 <Tooltip>
                                   <TooltipTrigger asChild>
-                                    <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                   </TooltipTrigger>
                                   <TooltipContent className="w-80 p-3">
                                     <p>Frases ou palavras que o agente deve priorizar ao responder.</p>
@@ -935,7 +934,7 @@ export default function AgentConfig() {
                                 <TooltipProvider>
                                   <Tooltip>
                                     <TooltipTrigger asChild>
-                                      <InfoCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                                      <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                                     </TooltipTrigger>
                                     <TooltipContent className="w-80 p-3">
                                       <p>Quando o cliente usar esta palavra, o atendimento será transferido para um atendente humano.</p>
